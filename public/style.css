@@ -1,0 +1,150 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background:linear-gradient(to right, #d0eaf7, #fce9d2);
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    background: #0077cc;
+    color: white;
+    padding: 15px;
+    margin: 0;
+    border-bottom: 4px solid #005fa3;
+}
+
+form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px;
+    flex-wrap: wrap;
+}
+
+input, select, button {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 6px;
+    background: #0077cc;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #005fa3;
+}
+
+ordenar-btn {
+    display:block;
+    margin: 0 auto 20px;
+    background-color: #2196f3;
+}
+
+
+#ordenar-btn:hover {
+  background-color: #1976D2;
+}
+
+#lista-productos {
+  list-style: none;
+  padding: 0;
+  width: 80%;
+  margin: 0 auto;
+}
+
+li {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 8px 0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.3s;
+}
+
+li:hover {
+  background-color: #f0f8ff;
+}
+
+.comprado {
+  text-decoration: line-through;
+  color: gray;
+  background-color: #e0e0e0;
+}
+
+.eliminar {
+  background-color: #ff5252;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.eliminar:hover {
+  background-color: #e53935;
+}
+
+.controles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+#busqueda, #filtro-categoria {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #aaa;
+  font-size: 1em;
+  width: 200px;
+}
+
+#contador {
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #2e7d32;
+}
+
+#limpiar-btn {
+  background-color: #f44336;
+}
+
+#limpiar-btn:hover {
+  background-color: #c62828;
+}
+
+#prioridad {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  font-size: 1em;
+}
+
+.prioridad-Alta {
+  border-left: 8px solid #e53935;
+}
+
+.prioridad-Media {
+  border-left: 8px solid #ffb300;
+}
+
+.prioridad-Baja {
+  border-left: 8px solid #43a047;
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, Initial-scale=1.0">
+  <title>OrdenaMiLista</title>
+   <link rel="stylesheet"
+  href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+      margin-bottom: 20px;
+    }
+    input, select, button {
+      margin: 5px 0;
+      padding: 8px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #fff;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0px 1px 3px rgba(0,0,0,0.2);
+    }
+    .eliminar {
+      background: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .eliminar:hover {
+      background: darkred;
+    }
+  </style>
+</head>
+<body>
+  <h1> OrdenaMiLista</h1>
+  <form id="form-lista">
+    <label>Producto:</label><br>
+    <input type="text" id="producto" required><br>
+    <label>Categoría:</label><br>
+    <select id="categoria" required>
+      <option value="Alimentos">Alimentos</option>
+      <option value="Limpieza">Limpieza</option>
+      <option value="Bebidas">Bebidas</option>
+      <option value="Otros">Otros</option>
+    </select><br>
+    <label>Prioridad:</label>
+     <select id="prioridad">
+      <option value="Alta">Alta</option>
+      <option value="Media" selected>Media</option>
+      <option value="Baja">Baja</option>
+    </select>
+    <label>Cantidad:</label><br>
+    <input type="number" id="cantidad" min="1" required><br><br>
+    <button type="submit">Agregar a la lista</button>
+  </form>
+  <h2> Mi lista de compras</h2>
+  <ul id="lista-productos"></ul>
+  <div class="controles">
+    <input type="text" id="busqueda" placeholder="Buscar producto o categoría...">
+    <select id="filtro-categoria">
+      <option value="">Todas las categorías</option>
+    </select>
+    <button id="ordenar-btn">Ordenar</button>
+    <button id="ordenar-prioridad">Ordenar por Prioridad</button>
+    <button id="limpiar-btn">Limpiar </button>
+  </div>
+
+  <p id="contador">Total de productos: 0</p>
+
+  <ul id="lista-productos"></ul>
+  <script src="men.js"></script>
+</body>
+</html>
