@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function cargarProductos() {
     try {
-      const res = await fetch("https://web-7b2e.onrender.com");
+      const res = await fetch("https://web-7b2e.onrender.com/items");
       const data = await res.json();
       productos = data.map(i => ({
         producto: i.nombre_item,
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nuevo = { nombre_item: producto, cantidad: cantidad };
 
     try {
-    const res = await fetch("https://web-7b2e.onrender.com", {
+    const res = await fetch("https://web-7b2e.onrender.com/items", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(nuevo)
@@ -151,3 +151,4 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarProductos();
 
 });
+
