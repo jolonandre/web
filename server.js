@@ -10,10 +10,11 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 const conexion = mysql.createConnection({
-  host: "localhost",
-  user: "root",       
-  password: "",       
-  database: "ordenamilista",
+  host: "b5ib0hs8xofvoy3oxoop-mysql.services.clever-cloud.com",
+  user: "ukdu8sdatn3ilynd",       
+  password: "EXivM1Q4LGihxkbK9DUs",       
+  database: "b5ib0hs8xofvoy3oxoop",
+  port: 3306
 });
 
 conexion.connect((error) => {
@@ -101,3 +102,4 @@ app.delete("/items/:id", (req, res) => {
 app.listen(3000, () => {
   console.log(" Servidor iniciado en http://localhost:3000");
 });
+
