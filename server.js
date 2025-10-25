@@ -24,37 +24,22 @@ conexion.connect((error) => {
   }
   console.log(" Conectado al servidor MySQL");
 
-  conexion.query("CREATE DATABASE IF NOT EXISTS ordenamilista", (err) => {
+  const crearTabla = `
+    CREATE TABLE IF NOT EXISTS items (
+      id_item INT AUTO_INCREMENT PRIMARY KEY,
+      id_lista INT,
+      nombre_item VARCHAR(100),
+      cantidad INT,
+      comprado BOOLEAN DEFAULT 0
+    );
+  `;
+
+  conexion.query(crearTabla, (err) => {
     if (err) {
-      console.error(" Error al crear la base de datos:", err);
-      return;
+      console.error("Error al crear tabla:", err);
+    } else {
+      console.log(" Tabla de Items creada.");
     }
-    console.log(" Base de datos  verificada o creada.");
-
-    conexion.changeUser({ database: "ordenamilista" }, (err2) => {
-      if (err2) {
-        console.error(" Error al seleccionar la base de datos:", err2);
-        return;
-      }
-
-      const crearTabla = `
-        CREATE TABLE IF NOT EXISTS items (
-          id_item INT AUTO_INCREMENT PRIMARY KEY,
-          id_lista INT,
-          nombre_item VARCHAR(100),
-          cantidad INT,
-          comprado BOOLEAN DEFAULT 0
-        );
-      `;
-
-      conexion.query(crearTabla, (err3) => {
-        if (err3) {
-          console.error(" Error al crear tabla:", err3);
-        } else {
-          console.log(" Tabla 'items' verificada o creada correctamente.");
-        }
-      });
-    });
   });
 });
 
@@ -99,7 +84,9 @@ app.delete("/items/:id", (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log(" Servidor iniciado en http://localhost:3000");
+const PORT= process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log('servidor iniciado en puerto ${PORT}');
 });
+
 
