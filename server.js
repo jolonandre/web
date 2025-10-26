@@ -6,45 +6,46 @@ const bodyParser = require("body-parser");
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-
 app.use(express.static("public"));
 
-const conexion = mysql.createConnection({
+const conexion = mysql.createPool({
+  connectionLimit: 10,
   host: "b5ib0hs8xofvoy3oxoop-mysql.services.clever-cloud.com",
-  user: "ukdu8sdatn3ilynd",       
-  password: "EXivM1Q4LGihxkbK9DUs",       
+  user: "ukdu8sdatn3ilynd",
+  password: "EXivM1Q4LGihxkbK9DUs",
   database: "b5ib0hs8xofvoy3oxoop",
   port: 3306
 });
 
-conexion.connect((error) => {
-  if (error) {
-    console.error(" Error al conectar a MySQL:", error);
-    return;
+conexion.getConnection((err, connection) => {
+  if (err) {
+    console.error(" Error al conectar al servidor:", err);
+  } else {
+    console.log("Conectado al servidor");
+
+    const crearTabla = `
+      CREATE TABLE IF NOT EXISTS items (
+        id_item INT AUTO_INCREMENT PRIMARY KEY,
+        id_lista INT,
+        nombre_item VARCHAR(100),
+        cantidad INT,
+        comprado BOOLEAN DEFAULT 0
+      );
+    `;
+
+    connection.query(crearTabla, (err) => {
+      if (err) {
+        console.error("Error al crear tabla:", err);
+      } else {
+        console.log(" Tabla de Items creada.");
+      }
+      connection.release(); 
+    });
   }
-  console.log(" Conectado al servidor MySQL");
-
-  const crearTabla = `
-    CREATE TABLE IF NOT EXISTS items (
-      id_item INT AUTO_INCREMENT PRIMARY KEY,
-      id_lista INT,
-      nombre_item VARCHAR(100),
-      cantidad INT,
-      comprado BOOLEAN DEFAULT 0
-    );
-  `;
-
-  conexion.query(crearTabla, (err) => {
-    if (err) {
-      console.error("Error al crear tabla:", err);
-    } else {
-      console.log(" Tabla de Items creada.");
-    }
-  });
 });
 
 app.get("/", (req, res) => {
-  res.send("Servidor  funcionando ");
+  res.send("Servidor funcionando ");
 });
 
 app.get("/items", (req, res) => {
@@ -71,7 +72,6 @@ app.post("/items", (req, res) => {
     }
   });
 });
-
 app.delete("/items/:id", (req, res) => {
   const id = req.params.id;
   conexion.query("DELETE FROM items WHERE id_item = ?", [id], (error) => {
@@ -83,10 +83,10 @@ app.delete("/items/:id", (req, res) => {
     }
   });
 });
-
-const PORT= process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log('servidor iniciado en puerto ${PORT}');
+  console.log(`Servidor iniciado en puerto ${PORT}`);
 });
+
 
 
