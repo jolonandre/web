@@ -63,7 +63,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch("https://web-7b2e.onrender.com/items");
       const data = await res.json();
       productos = data.map(i => ({
-        id_item: i.id.nombre.item,
         producto: i.nombre_item,
         cantidad: i.cantidad,
         categoria: "General",
@@ -153,6 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarProductos();
 
 });
+
 
 
 
