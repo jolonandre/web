@@ -6,6 +6,7 @@ const bodyParser = require("body-parser");
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+
 app.use(express.static("public"));
 
 const conexion = mysql.createPool({
@@ -16,30 +17,30 @@ const conexion = mysql.createPool({
   port: 3306
 });
 
-conexion.connect((error) => { if (error) { 
+conexion.connect((error) => {  
+  if (error) { 
   console.error(" Error al conectar", error);
    return;
-    console.log("Conectado al servidor");
-
-    const crearTabla = `
-      CREATE TABLE IF NOT EXISTS items (
-        id_item INT AUTO_INCREMENT PRIMARY KEY,
-        id_lista INT,
-        nombre_item VARCHAR(100),
-        cantidad INT,
-        comprado BOOLEAN DEFAULT 0
-      );
-    `;
-
-    connection.query(crearTabla, (err) => {
-      if (err) {
-        console.error("Error al crear tabla:", err);
-      } else {
-        console.log(" Tabla de Items creada.");
-      }
-      connection.release(); 
-    });
   }
+  console.log(" Conectado al servidor");
+
+  const crearTabla = `
+    CREATE TABLE IF NOT EXISTS items (
+      id_item INT AUTO_INCREMENT PRIMARY KEY,
+      id_lista INT,
+      nombre_item VARCHAR(100),
+      cantidad INT,
+      comprado BOOLEAN DEFAULT 0
+    );
+  `;
+
+  conexion.query(crearTabla, (err) => {
+    if (err) {
+      console.error("Error al crear tabla:", err);
+    } else {
+      console.log(" Tabla de Items creada.");
+    }
+  });
 });
 
 app.get("/", (req, res) => {
@@ -85,6 +86,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en puerto ${PORT}`);
 });
+
 
 
 
