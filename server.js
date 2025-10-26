@@ -9,7 +9,6 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 
 const conexion = mysql.createPool({
-  connectionLimit: 10,
   host: "b5ib0hs8xofvoy3oxoop-mysql.services.clever-cloud.com",
   user: "ukdu8sdatn3ilynd",
   password: "EXivM1Q4LGihxkbK9DUs",
@@ -17,10 +16,9 @@ const conexion = mysql.createPool({
   port: 3306
 });
 
-conexion.getConnection((err, connection) => {
-  if (err) {
-    console.error(" Error al conectar al servidor:", err);
-  } else {
+conexion.connect((error) => { if (error) { 
+  console.error(" Error al conectar", error);
+   return;
     console.log("Conectado al servidor");
 
     const crearTabla = `
@@ -87,6 +85,7 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor iniciado en puerto ${PORT}`);
 });
+
 
 
 
