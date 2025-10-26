@@ -29,30 +29,13 @@ document.addEventListener("DOMContentLoaded", () => {
       btnEliminar.textContent = "x";
       btnEliminar.classList.add("eliminar");
       btnEliminar.addEventListener("click", (e) => {
-        btnEliminar.addEventListener("click", async (e) => {
-  e.stopPropagation();
+      btnEliminar.addEventListener("click", (e) => {
+       e.stopPropagation();
+       productos.splice(index, 1);
+       actualizarCategorias();
+       mostrarLista();
+      });
 
-  try {
-    const id = item.id_item;
-    if (!id) {
-      console.error("No se encontró el id del producto");
-      return;
-    }
-    const res = await fetch(`https://web-7b2e.onrender.com/items/${id}`, {
-      method: "DELETE"
-    });
-
-    if (!res.ok) {
-      throw new Error("Error al eliminar");
-    }
-    productos.splice(index, 1);
-    actualizarCategorias();
-    mostrarLista();
-  } catch (error) {
-    console.error("Error al eliminar producto:", error);
-    alert("No se pudo eliminar el producto");
-  }
-});
       li.appendChild(btnEliminar);
       lista.appendChild(li);
     });
@@ -170,5 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarProductos();
 
 });
+
 
 
