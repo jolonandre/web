@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-lista");
   const lista = document.getElementById("lista-productos");
@@ -29,11 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
       btnEliminar.textContent = "x";
       btnEliminar.classList.add("eliminar");
       btnEliminar.addEventListener("click", (e) => {
-      btnEliminar.addEventListener("click", (e) => {
-       e.stopPropagation();
-       productos.splice(index, 1);
-       actualizarCategorias();
-       mostrarLista();
+        e.stopPropagation();
+        productos.splice(index, 1);
+        actualizarCategorias();
+        mostrarLista();
       });
 
       li.appendChild(btnEliminar);
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nuevo = { nombre_item: producto, cantidad: cantidad };
 
     try {
-    const res = await fetch("https://web-7b2e.onrender.com/items", {
+      const res = await fetch("https://web-7b2e.onrender.com/items", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(nuevo)
@@ -150,8 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   cargarProductos();
-
 });
+
 
 
 
