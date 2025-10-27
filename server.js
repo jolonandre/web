@@ -9,20 +9,20 @@ app.use(bodyParser.json());
 
 app.use(express.static("public"));
 
-const conexion = mysql.createPool({
+const conexion = mysql.createConnection({
   host: "b5ib0hs8xofvoy3oxoop-mysql.services.clever-cloud.com",
-  user: "ukdu8sdatn3ilynd",
-  password: "EXivM1Q4LGihxkbK9DUs",
+  user: "ukdu8sdatn3ilynd",       
+  password: "EXivM1Q4LGihxkbK9DUs",       
   database: "b5ib0hs8xofvoy3oxoop",
   port: 3306
 });
 
-conexion.connect((error) => {  
-  if (error) { 
-  console.error(" Error al conectar", error);
-   return;
+conexion.connect((error) => {
+  if (error) {
+    console.error(" Error al conectar a MySQL:", error);
+    return;
   }
-  console.log(" Conectado al servidor");
+  console.log(" Conectado al servidor MySQL");
 
   const crearTabla = `
     CREATE TABLE IF NOT EXISTS items (
@@ -44,7 +44,7 @@ conexion.connect((error) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Servidor funcionando ");
+  res.send("Servidor  funcionando ");
 });
 
 app.get("/items", (req, res) => {
@@ -71,6 +71,7 @@ app.post("/items", (req, res) => {
     }
   });
 });
+
 app.delete("/items/:id", (req, res) => {
   const id = req.params.id;
   conexion.query("DELETE FROM items WHERE id_item = ?", [id], (error) => {
@@ -82,10 +83,12 @@ app.delete("/items/:id", (req, res) => {
     }
   });
 });
-const PORT = process.env.PORT || 3000;
+
+const PORT= process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Servidor iniciado en puerto ${PORT}`);
+  console.log('servidor iniciado en puerto ${PORT}');
 });
+
 
 
 
