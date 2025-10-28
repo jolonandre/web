@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use(express.static("public"));
+
 
 const conexion = mysql.createConnection({
   host: "b5ib0hs8xofvoy3oxoop-mysql.services.clever-cloud.com",
@@ -88,6 +88,7 @@ const PORT= process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log('servidor iniciado en puerto ${PORT}');
 });
+
 
 
 
