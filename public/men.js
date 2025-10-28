@@ -58,23 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  async function cargarProductos() {
-    try {
-      const res = await fetch("https://web-7b2e.onrender.com/items");
-      const data = await res.json();
-      productos = data.map(i => ({
-        producto: i.nombre_item,
-        cantidad: i.cantidad,
-        categoria: "General",
-        prioridad: "Media",
-        comprado: i.comprado === 1
-      }));
-      actualizarCategorias();
-      mostrarLista();
-    } catch (error) {
-      console.error("Error al cargar productos:", error);
-    }
-  }
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -149,8 +132,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  cargarProductos();
 });
+
 
 
 
